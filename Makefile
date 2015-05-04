@@ -1,5 +1,3 @@
-LD=ld
-RUSTC=rustc
 NASM=nasm
 QEMU=qemu-system-i386
 
@@ -21,4 +19,4 @@ debug: floppy.img
 	$(QEMU) -s -S -fda $<
 
 clean:
-	rm -f *.bin *.o *.img *.rlib
+	rm -f *.bin *.img
