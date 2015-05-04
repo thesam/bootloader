@@ -13,10 +13,7 @@ loader.bin: loader.asm
 	$(NASM) -o $@ -f bin $<
 
 run: floppy.img
-	$(QEMU) -s -fda $<
-
-debug: floppy.img
-	$(QEMU) -s -S -fda $<
+	$(QEMU) -fda $<
 
 clean:
 	rm -f *.bin *.img
