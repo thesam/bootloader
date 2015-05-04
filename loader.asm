@@ -1,3 +1,8 @@
+; CPU starts in "real mode"
+; BIOS loads the bootloader into memory at 0x7C00
+; Bootloader must be 512 bytes
+; Bootloader must end with signature bytes: 0x55,0xAA
+
 use16
 
 org 0x7c00
