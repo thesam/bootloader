@@ -7,7 +7,7 @@ main:
     mov ah, 6
     mov al, 0
     xor bx, bx
-    mov bh, 43h
+    mov bh, 1fh
     xor cx, cx
     mov dx, 184fh
     int 10h
