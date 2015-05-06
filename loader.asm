@@ -8,12 +8,10 @@ use16
 org 0x7c00
 
 boot:
-    ; load OS kernel into 0x7e00 so we can jump to it later
     mov bx, 0x8000  ; read buffer
     mov ah, 2   ; read
     mov al, 1   ; 1 sector at a time (512B)
     mov ch, 0   ; cylinder
-    ;  Sector 1 is the first sector and contains this bootloader code (512 bytes). The Rust code starts at sector 2.
     mov cl, 2   ; sector
     mov dh, 0  ; head
     int 0x13
@@ -28,6 +26,7 @@ error:
     or al, al
     jz .done
     mov ah, 0x0e
+    ; TODO: ah to print string instead?
     int 0x10
     jmp .loop
 .done:
