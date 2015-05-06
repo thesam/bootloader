@@ -27,7 +27,7 @@ boot:
     ; initialize stack
     mov sp, 0x7bfe
 
-    jmp error.done
+    jmp 0x7e00
 
 error:
     mov si, .msg
