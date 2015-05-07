@@ -10,13 +10,13 @@ main:
     mov bh, 1fh
     xor cx, cx
     mov dx, 184fh
-    int 10h
+    int 10h ; Scroll screen
 
     mov al, 0
     mov ah, 2
     xor bx, bx
     xor dx, dx
-    int 10h
+    int 10h ; Move cursor to top left
 
 greeting:
     mov si, msg
@@ -25,7 +25,7 @@ greeting:
     or al, al
     jz .done
     mov ah, 0x0e
-    int 0x10
+    int 0x10 ; Print character
     jmp .loop
 .done:
 
@@ -35,7 +35,7 @@ terminal:
     xor bx, bx
     xor dx, dx
     mov dh, 1
-    int 10h
+    int 10h ; Move cursor to beginning of second row
 
     mov si, prompt
 .loop:
@@ -43,7 +43,7 @@ terminal:
     or al, al
     jz .done
     mov ah, 0x0e
-    int 0x10
+    int 0x10  ; Print character
     jmp .loop
 .done:
 
