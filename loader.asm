@@ -15,23 +15,8 @@ boot:
     mov cl, 2   ; sector
     mov dh, 0  ; head
     int 0x13
-    jc error
 
     jmp 0x8000
-
-error:
-    mov si, .msg
-.loop:
-    lodsb
-    or al, al
-    jz .done
-    mov ah, 0x0e
-    ; TODO: ah to print string instead?
-    int 0x10
-    jmp .loop
-.done:
-    jmp $
-    .msg db "Error: could not read disk", 0
 
 times 510-($-$$) db 0
 db 0x55
