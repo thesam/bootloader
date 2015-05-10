@@ -3,41 +3,44 @@ use16
 org 0x8000
 
 main:
-    xor ax, ax
-    mov ah, 6
-    mov al, 0
-    xor bx, bx
-    mov bh, 1fh
-    xor cx, cx
-    mov dx, 184fh
-    int 10h ; Scroll screen
+    call clear_screen
 
-    mov al, 0
-    mov ah, 2
-    xor bx, bx
     xor dx, dx
-    int 10h ; Move cursor to top left
+    mov dh, 0
+    call move_cursor
 
-greeting:
+
     mov si, msg
-.loop:
-    lodsb
-    or al, al
-    jz .done
-    mov ah, 0x0e
-    int 0x10 ; Print character
-    jmp .loop
-.done:
+    call print_string
 
-terminal:
-    mov al, 0
-    mov ah, 2
-    xor bx, bx
     xor dx, dx
     mov dh, 1
-    int 10h ; Move cursor to beginning of second row
+    call move_cursor
 
     mov si, prompt
+    call print_string
+
+    jmp $
+
+move_cursor: ; dh=row
+  mov al, 0
+  mov ah, 2
+  xor bx, bx
+  int 10h
+  ret
+
+clear_screen:
+  xor ax, ax
+  mov ah, 6
+  mov al, 0
+  xor bx, bx
+  mov bh, 1fh
+  xor cx, cx
+  mov dx, 184fh
+  int 10h ; Scroll screen
+  ret
+
+print_string: ; si = string to print
 .loop:
     lodsb
     or al, al
@@ -46,8 +49,7 @@ terminal:
     int 0x10  ; Print character
     jmp .loop
 .done:
-
-    jmp $
+  ret
 
 msg db "This is the operating system!", 0
 prompt db "$ ", 0
