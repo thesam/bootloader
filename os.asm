@@ -51,5 +51,5 @@ print_string: ; si = string to print
 .done:
   ret
 
-msg db "Hello, OpKoKo 15.1! This is the operating system!", 0
+msg db "Hello, Studentkonferens! This is the operating system!", 0
 prompt db "$ ", 0
